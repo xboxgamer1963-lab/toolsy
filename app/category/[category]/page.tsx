@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ChevronRight } from "lucide-react";
+import { Icon } from "@/components/Icon";
 import { ToolCard } from "@/components/ToolCard";
-import { categories, toolsIn, type CategoryId } from "@/lib/tools";
+import { categories, categoryVars, toolsIn } from "@/lib/tools";
 
 export const dynamicParams = false;
 
@@ -31,18 +33,33 @@ export default async function CategoryPage({ params }: Props) {
   if (!c) notFound();
 
   return (
-    <div className="container">
-      <nav className="breadcrumbs" aria-label="Breadcrumb">
-        <Link href="/">Home</Link> › {c.name}
-      </nav>
-      <h1>
-        {c.icon} {c.title}
-      </h1>
-      <p className="lead">{c.description}</p>
-      <div className="tool-grid">
-        {toolsIn(c.id as CategoryId).map((t) => (
-          <ToolCard key={t.slug} tool={t} />
-        ))}
+    <div className="themed" style={categoryVars(c.id)}>
+      <section className="page-hero compact">
+        <div className="blobs" aria-hidden>
+          <span className="blob b1" />
+          <span className="blob b2" />
+        </div>
+        <div className="container">
+          <nav className="breadcrumbs" aria-label="Breadcrumb">
+            <Link href="/">Home</Link>
+            <ChevronRight size={14} aria-hidden />
+            <span>{c.name}</span>
+          </nav>
+          <div className="title-row">
+            <span className="tile lg">
+              <Icon name={c.icon} size={34} />
+            </span>
+            <h1>{c.title}</h1>
+          </div>
+          <p className="lead">{c.description}</p>
+        </div>
+      </section>
+      <div className="container">
+        <div className="tool-grid">
+          {toolsIn(c.id).map((t, i) => (
+            <ToolCard key={t.slug} tool={t} index={i} />
+          ))}
+        </div>
       </div>
     </div>
   );

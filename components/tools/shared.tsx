@@ -1,5 +1,6 @@
 "use client";
 
+import { Check, CloudUpload, Copy } from "lucide-react";
 import { useRef, useState } from "react";
 
 export const usd = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
@@ -59,7 +60,10 @@ export function Stat({ k, v, primary }: { k: string; v: React.ReactNode; primary
   return (
     <div className={`stat${primary ? " primary" : ""}`}>
       <div className="k">{k}</div>
-      <div className="v">{v}</div>
+      {/* Re-keying on the value replays the pop animation whenever the result changes. */}
+      <div className="v" key={typeof v === "string" ? v : undefined}>
+        {v}
+      </div>
     </div>
   );
 }
@@ -97,6 +101,7 @@ export function CopyButton({ text, label = "Copy" }: { text: string; label?: str
         setTimeout(() => setCopied(false), 1500);
       }}
     >
+      {copied ? <Check size={17} /> : <Copy size={17} />}
       {copied ? "Copied!" : label}
     </button>
   );
@@ -157,8 +162,12 @@ export function FileDrop({
         if (files.length) onFiles(multiple ? files : files.slice(0, 1));
       }}
     >
+      <span className="tile">
+        <CloudUpload size={28} />
+      </span>
       <strong>{label}</strong>
       <span className="muted small">{hint ?? "or drag and drop here"}</span>
+      <span className="btn small choose">Browse files</span>
       <input
         ref={input}
         type="file"

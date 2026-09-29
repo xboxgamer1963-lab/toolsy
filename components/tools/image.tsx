@@ -1,5 +1,6 @@
 "use client";
 
+import { Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { FileDrop, Stat, baseName, downloadBlob, formatBytes } from "./shared";
 
@@ -186,7 +187,7 @@ export function ImageCompressor() {
           disabled={!out}
           onClick={() => out && downloadBlob(out, `${baseName(loaded.file.name)}-compressed.${EXT[format]}`)}
         >
-          Download
+          <Download size={17} /> Download
         </button>
         <button type="button" className="btn secondary" onClick={reset}>
           Choose another image

@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowLeftRight, Plus, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { fmt, num } from "./shared";
 
@@ -167,7 +168,7 @@ export function UnitConverter() {
             setTo(from);
           }}
         >
-          ⇄ Swap units
+          <ArrowLeftRight size={16} /> Swap units
         </button>
       </div>
       <div className="result-line">
@@ -450,7 +451,7 @@ export function TimeZoneConverter() {
                     aria-label={`Remove ${zoneName(z)}`}
                     onClick={() => setTargets(targets.filter((t) => t !== z))}
                   >
-                    ✕
+                    <X size={16} />
                   </button>
                 </td>
               </tr>
@@ -471,7 +472,7 @@ export function TimeZoneConverter() {
             disabled={!adding || targets.includes(adding)}
             onClick={() => setTargets([...targets, adding])}
           >
-            + Add
+            <Plus size={18} /> Add
           </button>
         </div>
       </div>

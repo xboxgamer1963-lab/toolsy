@@ -350,12 +350,19 @@ export function BmiCalculator() {
           <div className="bmi-bar" aria-hidden>
             <span className="marker" style={{ left: `${pos}%` }} />
           </div>
-          <div className="small muted" style={{ display: "flex", justifyContent: "space-between" }}>
-            <span>10</span>
-            <span>18.5</span>
-            <span>25</span>
-            <span>30</span>
-            <span>40</span>
+          <div className="small muted" style={{ position: "relative", height: 20 }} aria-hidden>
+            {[10, 18.5, 25, 30, 40].map((n) => (
+              <span
+                key={n}
+                style={{
+                  position: "absolute",
+                  left: `${((n - 10) / 30) * 100}%`,
+                  transform: n === 10 ? "none" : n === 40 ? "translateX(-100%)" : "translateX(-50%)",
+                }}
+              >
+                {n}
+              </span>
+            ))}
           </div>
         </>
       )}
