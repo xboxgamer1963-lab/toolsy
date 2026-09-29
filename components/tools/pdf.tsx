@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowDown, ArrowUp, FileText, X } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { useState } from "react";
 import { renderImage } from "./image";
@@ -36,10 +37,11 @@ function FileList({ items, setItems }: { items: Item[]; setItems: (i: Item[]) =>
           <span className="muted small" style={{ width: 20 }}>
             {i + 1}.
           </span>
+          <FileText size={18} color="var(--accent)" aria-hidden />
           <span className="name">{it.file.name}</span>
           <span className="muted small">{formatBytes(it.file.size)}</span>
           <button type="button" className="btn small secondary" disabled={i === 0} onClick={() => move(i, -1)} aria-label="Move up">
-            ↑
+            <ArrowUp size={15} />
           </button>
           <button
             type="button"
@@ -48,7 +50,7 @@ function FileList({ items, setItems }: { items: Item[]; setItems: (i: Item[]) =>
             onClick={() => move(i, 1)}
             aria-label="Move down"
           >
-            ↓
+            <ArrowDown size={15} />
           </button>
           <button
             type="button"
@@ -56,7 +58,7 @@ function FileList({ items, setItems }: { items: Item[]; setItems: (i: Item[]) =>
             onClick={() => setItems(items.filter((x) => x.id !== it.id))}
             aria-label="Remove"
           >
-            ✕
+            <X size={15} />
           </button>
         </li>
       ))}

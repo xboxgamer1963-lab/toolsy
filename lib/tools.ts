@@ -1,3 +1,5 @@
+import type { IconName } from "@/components/Icon";
+
 export type CategoryId = "calculators" | "converters" | "pdf" | "image" | "text";
 
 export interface Category {
@@ -5,7 +7,9 @@ export interface Category {
   name: string;
   title: string;
   description: string;
-  icon: string;
+  icon: IconName;
+  /** Gradient stops used for this category's accents. */
+  colors: [string, string];
 }
 
 export interface Faq {
@@ -17,7 +21,7 @@ export interface Tool {
   slug: string;
   name: string;
   category: CategoryId;
-  icon: string;
+  icon: IconName;
   /** One-line summary for cards. */
   short: string;
   /** <title> — lead with the main keyword. */
@@ -36,35 +40,40 @@ export const categories: Category[] = [
     name: "Calculators",
     title: "Free Online Calculators",
     description: "Money, health and everyday math calculators with instant results.",
-    icon: "🧮",
+    icon: "Calculator",
+    colors: ["#8b5cf6", "#d946ef"],
   },
   {
     id: "converters",
     name: "Converters",
     title: "Free Unit & Time Converters",
     description: "Convert units, temperatures and time zones in one click.",
-    icon: "🔁",
+    icon: "ArrowLeftRight",
+    colors: ["#06b6d4", "#10b981"],
   },
   {
     id: "pdf",
     name: "PDF Tools",
     title: "Free PDF Tools",
     description: "Merge, split and create PDFs privately in your browser.",
-    icon: "📄",
+    icon: "FileText",
+    colors: ["#f43f5e", "#fb923c"],
   },
   {
     id: "image",
     name: "Image Tools",
     title: "Free Image Tools",
     description: "Compress, resize and convert images without uploading them.",
-    icon: "🖼️",
+    icon: "Image",
+    colors: ["#ec4899", "#f59e0b"],
   },
   {
     id: "text",
     name: "Text & Dev Tools",
     title: "Free Text & Developer Tools",
     description: "Count words, change case, generate passwords, QR codes and more.",
-    icon: "✍️",
+    icon: "Code",
+    colors: ["#3b82f6", "#6366f1"],
   },
 ];
 
@@ -77,7 +86,7 @@ export const tools: Tool[] = [
     slug: "percentage-calculator",
     name: "Percentage Calculator",
     category: "calculators",
-    icon: "％",
+    icon: "Percent",
     short: "Find X% of Y, percent of a total, and percent change.",
     title: "Percentage Calculator – Percent Of, Percent Change & More",
     description:
@@ -108,7 +117,7 @@ export const tools: Tool[] = [
     slug: "mortgage-calculator",
     name: "Mortgage Calculator",
     category: "calculators",
-    icon: "🏠",
+    icon: "House",
     short: "Estimate your monthly house payment with taxes and insurance.",
     title: "Mortgage Calculator – Monthly Payment with Taxes & Insurance",
     description:
@@ -140,7 +149,7 @@ export const tools: Tool[] = [
     slug: "loan-calculator",
     name: "Loan Calculator",
     category: "calculators",
-    icon: "💵",
+    icon: "Banknote",
     short: "Monthly payment and total interest for any fixed-rate loan.",
     title: "Loan Calculator – Monthly Payment & Total Interest",
     description:
@@ -167,7 +176,7 @@ export const tools: Tool[] = [
     slug: "compound-interest-calculator",
     name: "Compound Interest Calculator",
     category: "calculators",
-    icon: "📈",
+    icon: "TrendingUp",
     short: "See how savings and investments grow over time.",
     title: "Compound Interest Calculator – With Monthly Contributions",
     description:
@@ -199,7 +208,7 @@ export const tools: Tool[] = [
     slug: "bmi-calculator",
     name: "BMI Calculator",
     category: "calculators",
-    icon: "⚖️",
+    icon: "Scale",
     short: "Body mass index in pounds/feet or kilograms/centimeters.",
     title: "BMI Calculator – Body Mass Index for Adults (lb & kg)",
     description:
@@ -226,7 +235,7 @@ export const tools: Tool[] = [
     slug: "age-calculator",
     name: "Age Calculator",
     category: "calculators",
-    icon: "🎂",
+    icon: "Cake",
     short: "Exact age in years, months and days, plus next birthday.",
     title: "Age Calculator – How Old Am I in Years, Months & Days",
     description:
@@ -253,7 +262,7 @@ export const tools: Tool[] = [
     slug: "tip-calculator",
     name: "Tip Calculator",
     category: "calculators",
-    icon: "🍽️",
+    icon: "Receipt",
     short: "Work out the tip and split the bill between friends.",
     title: "Tip Calculator – Calculate Tip & Split the Bill",
     description:
@@ -280,7 +289,7 @@ export const tools: Tool[] = [
     slug: "discount-calculator",
     name: "Discount Calculator",
     category: "calculators",
-    icon: "🏷️",
+    icon: "Tag",
     short: "Sale price after a percent off, with optional sales tax.",
     title: "Discount Calculator – Sale Price After % Off",
     description:
@@ -309,7 +318,7 @@ export const tools: Tool[] = [
     slug: "unit-converter",
     name: "Unit Converter",
     category: "converters",
-    icon: "📏",
+    icon: "Ruler",
     short: "Length, weight, volume, area, speed and data units.",
     title: "Unit Converter – Length, Weight, Volume, Area, Speed & Data",
     description:
@@ -340,7 +349,7 @@ export const tools: Tool[] = [
     slug: "temperature-converter",
     name: "Temperature Converter",
     category: "converters",
-    icon: "🌡️",
+    icon: "Thermometer",
     short: "Fahrenheit, Celsius and Kelvin — both ways.",
     title: "Temperature Converter – Fahrenheit to Celsius & Kelvin",
     description:
@@ -363,7 +372,7 @@ export const tools: Tool[] = [
     slug: "time-zone-converter",
     name: "Time Zone Converter",
     category: "converters",
-    icon: "🌐",
+    icon: "Globe",
     short: "Convert a time between cities and time zones.",
     title: "Time Zone Converter – EST, CST, MST, PST & World Time",
     description:
@@ -392,7 +401,7 @@ export const tools: Tool[] = [
     slug: "merge-pdf",
     name: "Merge PDF",
     category: "pdf",
-    icon: "📑",
+    icon: "FileStack",
     short: "Combine multiple PDF files into one document.",
     title: "Merge PDF – Combine PDF Files Online Free",
     description:
@@ -418,7 +427,7 @@ export const tools: Tool[] = [
     slug: "split-pdf",
     name: "Split PDF",
     category: "pdf",
-    icon: "✂️",
+    icon: "Scissors",
     short: "Extract pages or page ranges into a new PDF.",
     title: "Split PDF – Extract Pages from a PDF Online Free",
     description:
@@ -444,7 +453,7 @@ export const tools: Tool[] = [
     slug: "jpg-to-pdf",
     name: "JPG to PDF",
     category: "pdf",
-    icon: "🖨️",
+    icon: "FileImage",
     short: "Turn JPG, PNG or WebP images into a PDF.",
     title: "JPG to PDF – Convert Images to PDF Online Free",
     description:
@@ -472,7 +481,7 @@ export const tools: Tool[] = [
     slug: "image-compressor",
     name: "Image Compressor",
     category: "image",
-    icon: "🗜️",
+    icon: "ImageDown",
     short: "Shrink JPG, PNG and WebP file sizes.",
     title: "Image Compressor – Reduce Image File Size Online Free",
     description:
@@ -498,7 +507,7 @@ export const tools: Tool[] = [
     slug: "image-resizer",
     name: "Image Resizer",
     category: "image",
-    icon: "📐",
+    icon: "Scaling",
     short: "Resize images to exact pixel dimensions.",
     title: "Image Resizer – Resize Images to Any Size Online Free",
     description:
@@ -524,7 +533,7 @@ export const tools: Tool[] = [
     slug: "image-converter",
     name: "Image Converter",
     category: "image",
-    icon: "🔄",
+    icon: "RefreshCw",
     short: "Convert between PNG, JPG and WebP.",
     title: "Image Converter – PNG to JPG, JPG to PNG, WebP to JPG",
     description:
@@ -552,7 +561,7 @@ export const tools: Tool[] = [
     slug: "word-counter",
     name: "Word Counter",
     category: "text",
-    icon: "🔤",
+    icon: "Type",
     short: "Count words, characters, sentences and reading time.",
     title: "Word Counter – Count Words & Characters Online",
     description:
@@ -575,7 +584,7 @@ export const tools: Tool[] = [
     slug: "case-converter",
     name: "Case Converter",
     category: "text",
-    icon: "🔠",
+    icon: "CaseSensitive",
     short: "UPPERCASE, lowercase, Title Case, camelCase and more.",
     title: "Case Converter – Uppercase, Lowercase, Title Case & More",
     description:
@@ -598,7 +607,7 @@ export const tools: Tool[] = [
     slug: "password-generator",
     name: "Password Generator",
     category: "text",
-    icon: "🔐",
+    icon: "KeyRound",
     short: "Strong, random passwords generated securely.",
     title: "Password Generator – Create Strong Random Passwords",
     description:
@@ -625,7 +634,7 @@ export const tools: Tool[] = [
     slug: "qr-code-generator",
     name: "QR Code Generator",
     category: "text",
-    icon: "🔳",
+    icon: "QrCode",
     short: "Make QR codes for links, text and Wi-Fi. Download PNG or SVG.",
     title: "QR Code Generator – Free, No Sign-Up, Never Expires",
     description:
@@ -652,7 +661,7 @@ export const tools: Tool[] = [
     slug: "json-formatter",
     name: "JSON Formatter",
     category: "text",
-    icon: "{ }",
+    icon: "Braces",
     short: "Format, validate and minify JSON.",
     title: "JSON Formatter & Validator – Beautify or Minify JSON",
     description:
@@ -683,4 +692,10 @@ export function relatedTools(tool: Tool, count = 4): Tool[] {
   const same = tools.filter((t) => t.category === tool.category && t.slug !== tool.slug);
   const others = tools.filter((t) => t.category !== tool.category);
   return [...same, ...others].slice(0, count);
+}
+
+/** CSS custom properties that theme an element with a category's colors. */
+export function categoryVars(id: CategoryId): React.CSSProperties {
+  const [c1, c2] = getCategory(id).colors;
+  return { "--c1": c1, "--c2": c2 } as React.CSSProperties;
 }

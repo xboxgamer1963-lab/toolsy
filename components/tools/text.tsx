@@ -1,5 +1,6 @@
 "use client";
 
+import { Download, RefreshCw } from "lucide-react";
 import QRCode from "qrcode";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CopyButton, Stat, Tabs, downloadBlob, fmt } from "./shared";
@@ -238,7 +239,7 @@ export function PasswordGenerator() {
       <div className="btn-row">
         <CopyButton text={password} />
         <button type="button" className="btn secondary" onClick={generate}>
-          ↻ Generate new
+          <RefreshCw size={16} /> Generate new
         </button>
       </div>
 
@@ -416,10 +417,10 @@ export function QrCodeGenerator() {
         )}
         <div className="btn-row" style={{ justifyContent: "center", marginTop: 14 }}>
           <button type="button" className="btn" disabled={!dataUrl} onClick={downloadPng}>
-            Download PNG
+            <Download size={17} /> PNG
           </button>
           <button type="button" className="btn secondary" disabled={!dataUrl} onClick={downloadSvg}>
-            Download SVG
+            <Download size={17} /> SVG
           </button>
         </div>
       </div>
@@ -494,7 +495,7 @@ export function JsonFormatter() {
               className="btn secondary"
               onClick={() => downloadBlob(new Blob([output], { type: "application/json" }), "formatted.json")}
             >
-              Download .json
+              <Download size={17} /> Download .json
             </button>
           </div>
         </>
